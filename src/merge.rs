@@ -1,4 +1,4 @@
-/// Sort using the MergeSort algorithm.
+/// Sort using the Merge Sort algorithm.
 ///
 /// # Examples
 /// ```
