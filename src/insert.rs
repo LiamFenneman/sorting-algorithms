@@ -4,14 +4,12 @@ where
 {
     let mut vec = Vec::from(v);
 
-    let mut i = 0;
-    while i < vec.len() {
+    for i in 0..vec.len() {
         let mut j = i;
         while j > 0 && vec[j - 1] > vec[j] {
             vec.swap(j, j - 1);
             j -= 1;
         }
-        i += 1;
     }
 
     vec
