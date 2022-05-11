@@ -10,13 +10,13 @@ where
     T: PartialOrd + Copy,
 {
     if v.len() == 1 {
-        return Vec::from(&v[..]);
+        return Vec::from(v);
     }
 
     let mid = v.len() / 2;
-    let left = merge_sort(&v[0..mid]);
-    let right = merge_sort(&v[mid..v.len()]);
-    merge(&left[..], &right[..])
+    let left = merge_sort(&v[..mid]);
+    let right = merge_sort(&v[mid..]);
+    merge(&left, &right)
 }
 
 /// Merge two lists of elements.
@@ -26,25 +26,18 @@ fn merge<T: PartialOrd + Copy>(a: &[T], b: &[T]) -> Vec<T> {
     let mut left = 0;
     let mut right = 0;
 
-    loop {
-        if left < a.len() && right < b.len() {
-            if a[left] < b[right] {
-                res.push(a[left]);
-                left += 1;
-            } else {
-                res.push(b[right]);
-                right += 1;
-            }
-        } else if left < a.len() {
+    while left < a.len() && right < b.len() {
+        if a[left] < b[right] {
             res.push(a[left]);
             left += 1;
-        } else if right < b.len() {
+        } else {
             res.push(b[right]);
             right += 1;
-        } else {
-            break;
         }
     }
+
+    a[left..].iter().for_each(|&i| res.push(i));
+    b[right..].iter().for_each(|&i| res.push(i));
 
     res
 }

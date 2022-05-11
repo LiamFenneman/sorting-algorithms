@@ -22,10 +22,9 @@ where
 {
     if !v.is_empty() {
         let pi = partition(v);
-        let len = v.len();
 
-        quick_sort_mut(&mut v[0..pi]);
-        quick_sort_mut(&mut v[pi + 1..len]);
+        quick_sort_mut(&mut v[..pi]);
+        quick_sort_mut(&mut v[pi + 1..]);
     }
 }
 
